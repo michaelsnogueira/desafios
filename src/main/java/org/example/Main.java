@@ -1,46 +1,22 @@
 package org.example;
 
-import java.io.*;
-import java.time.LocalDateTime;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Scanner;
 
 //You are given a date. You just need to write the method, , which returns the day on that date. To simplify your task, we have provided a portion of the code in the editor.
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double payment = scanner.nextDouble();
+        scanner.close();
 
-        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+        // Write your code here.
 
-        int month = Integer.parseInt(firstMultipleInput[0]);
 
-        int day = Integer.parseInt(firstMultipleInput[1]);
-
-        int year = Integer.parseInt(firstMultipleInput[2]);
-
-        String res = Result.findDay(month, day, year);
-
-        bufferedWriter.write(res);
-        bufferedWriter.newLine();
-
-        bufferedReader.close();
-        bufferedWriter.close();
-    }
-    class Result {
-
-        /*
-         * Complete the 'findDay' function below.
-         *
-         * The function is expected to return a STRING.
-         * The function accepts following parameters:
-         *  1. INTEGER month
-         *  2. INTEGER day
-         *  3. INTEGER year
-         */
-
-        public static String findDay(int month, int day, int year) {
-        LocalDateTime localDateTime = LocalDateTime.of(year, month, day, 0, 0, 0, 0);
-        return localDateTime.getDayOfWeek().name();
-        }
-
+        System.out.println("US: " + NumberFormat.getCurrencyInstance(Locale.US).format(payment));
+        System.out.println("India: " + NumberFormat.getCurrencyInstance(new Locale("en", "IN")).format(payment));
+        System.out.println("China: " + NumberFormat.getCurrencyInstance(Locale.CHINA).format(payment));
+        System.out.println("France: " + NumberFormat.getCurrencyInstance(Locale.FRANCE).format(payment));
     }
 }
